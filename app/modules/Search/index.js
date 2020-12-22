@@ -6,6 +6,7 @@ import {
   TextInput,
   TouchableOpacity,
   View,
+  StyleSheet,
 } from 'react-native';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
@@ -25,9 +26,9 @@ class Search extends React.Component {
   render() {
     return (
       <SafeAreaView>
-        <View style={{flexDirection: 'row',marginBottom:16}}>
+        <View style={styles.searchBar}>
           <TextInput
-            style={{borderWidth: 1, height: 40, flex: 4, paddingStart: 10}}
+            style={styles.searchInput}
             placeholder={'Search movies (Atleast 2 characters)'}
             onChangeText={(searchText) => this.setState({searchText})}
           />
@@ -35,7 +36,7 @@ class Search extends React.Component {
             onPress={() => {
               this.props.action.getMovies(this.state.searchText);
             }}
-            style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+            style={styles.searchButton}>
             <Text>Search</Text>
           </TouchableOpacity>
         </View>
@@ -61,3 +62,24 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Search);
+
+
+const styles = StyleSheet.create({
+  searchBar: {
+    flexDirection: 'row',
+    marginBottom:16
+  },
+  searchInput: {
+    borderWidth: 1, 
+    height: 40, 
+    flex: 4, 
+    paddingStart: 10
+  },
+  searchButton:{
+    flex: 1, 
+    alignItems: 'center', 
+    justifyContent: 'center'
+  },
+
+
+});

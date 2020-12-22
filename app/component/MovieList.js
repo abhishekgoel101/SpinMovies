@@ -1,5 +1,5 @@
 import React from 'react';
-import {FlatList, View, Text, Image, ActivityIndicator, TouchableOpacity} from 'react-native';
+import {FlatList, View, Text, Image, ActivityIndicator, TouchableOpacity,StyleSheet,} from 'react-native';
 import * as imageUrls from "../res/images/imageUrls"
 
 class MovieList extends React.Component {
@@ -10,12 +10,12 @@ class MovieList extends React.Component {
       return <ActivityIndicator size="large" />;
     } else if (this.props.State.error) {
       return (
-          <Text style={{fontSize: 20, fontWeight: '700'}}>
+          <Text style={styles.errorHeading}>
             {this.props.State.error}
           </Text>
       );
     } else if (!this.props.State.data || this.props.State.data.length === 0) {
-      return <Text style={{fontSize: 20, fontWeight: '700'}}>No results found.</Text>;
+      return <Text  style={styles.errorHeading}>No results found.</Text>;
     }
     return (
       <FlatList
@@ -37,19 +37,11 @@ class MovieList extends React.Component {
     }
     return (
       <View
-        style={{
-          flex: 0.5,
-          alignItems: 'center',
-          justifyContent: 'center',
-          padding: 5,
-          borderWidth: 1,
-          borderColor:"black",
-          justifyContent:"space-between",
-        }}>
+        style={styles.itemMain}>
           <View style={{flex:1}}>
-            <Text style={{flex:4,marginBottom:4}} numberOfLines={2} >{Title}</Text>
-            <View style={{flexDirection:'row',flex:1}}>
-              <Image source={{uri: Poster}} style={{height: 100, width: '100%'}} />
+            <Text style={styles.title} numberOfLines={2} >{Title}</Text>
+            <View style={styles.flexRow,{flex:1}}>
+              <Image source={{uri: Poster}} style={styles.image} />
             </View>
             
           </View>
@@ -59,7 +51,7 @@ class MovieList extends React.Component {
                 <TouchableOpacity onPress={()=>{
                     this.props.addToShortlist(item);
                 }}>
-                  <View style={{backgroundColor:"purple",paddingHorizontal:8,paddingVertical:4}}>
+                  <View style={styles.shortlistButton}>
                     <Text>
                       Shortlist
                     </Text>
@@ -74,5 +66,37 @@ class MovieList extends React.Component {
     );
   };
 }
+const styles = StyleSheet.create({
+  errorHeading: {
+    fontSize: 20,
+    fontWeight: '700'
+  },
+  itemMain: {
+    flex: 0.5,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 5,
+    borderWidth: 1,
+    borderColor:"black",
+    justifyContent:"space-between",
+  },
+  shortlistButton:{
+    backgroundColor:"purple",
+    paddingHorizontal:8,
+    paddingVertical:4
+  },
+  title:{
+    flex:4,
+    marginBottom:4
+  },
+  flexRow:{
+    flexDirection:'row'
+  },
+  image:{
+    height: 100,
+     width: '100%'
+    }
 
+
+});
 export default MovieList;

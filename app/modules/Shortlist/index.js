@@ -6,6 +6,7 @@ import {
   TextInput,
   TouchableOpacity,
   View,
+  StyleSheet,
 } from 'react-native';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
@@ -27,7 +28,7 @@ class Shortlist extends React.Component {
     return (
       <SafeAreaView>
         <View style={{marginBottom:16}}>
-          <Text style={{fontSize: 24, fontWeight: '700'}} >Shortlisted Movies</Text>
+          <Text style={styles.shortlistedMovies} >Shortlisted Movies</Text>
         </View>
         <MovieList
           State={State}
@@ -47,3 +48,11 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Shortlist);
+
+const styles = StyleSheet.create({
+  shortlistedMovies: {
+  fontSize: 24, 
+  fontWeight: '700'
+  },
+
+});
