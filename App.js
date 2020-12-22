@@ -20,6 +20,7 @@ import {
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import MovieList from './app/component/MovieList';
 import Search from './app/modules/Search';
+import Shortlist from './app/modules/Shortlist';
 
 class App extends React.Component {
   render() {
@@ -31,15 +32,14 @@ class App extends React.Component {
         <Container>
           <Tabs tabBarPosition="bottom">
             <Tab heading="Search">
-              <Search />
+              <View style={{padding:12}}>
+                 <Search />
+              </View>
             </Tab>
             <Tab heading={'Shortlist'}>
-              <View
-                style={{
-                  backgroundColor: 'red',
-                  width: '100%',
-                  height: '100%',
-                }}></View>
+            <View style={{padding:12}}>
+                 <Shortlist />
+              </View>
             </Tab>
           </Tabs>
         </Container>

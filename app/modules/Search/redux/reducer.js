@@ -11,6 +11,7 @@ export default function searchReducer(state = initialState, action) {
         data: action.payload,
         loading: false,
         success: true,
+        error:null
       };
 
     case actionTypes.FETCH_DATA_INIT:

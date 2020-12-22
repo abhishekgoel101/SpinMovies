@@ -11,6 +11,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import MovieList from '../../component/MovieList';
 import * as action from './redux/action';
+import * as shortlistAction from '../Shortlist/redux/action';
 
 class Search extends React.Component {
   constructor(props) {
@@ -20,12 +21,11 @@ class Search extends React.Component {
     };
   }
   componentDidMount() {
-    console.log('this.props.state', this.props.State);
   }
   render() {
     return (
       <SafeAreaView>
-        <View style={{flexDirection: 'row', margin: 10}}>
+        <View style={{flexDirection: 'row',marginBottom:16}}>
           <TextInput
             style={{borderWidth: 1, height: 40, flex: 4, paddingStart: 10}}
             placeholder={'Search movies (Atleast 2 characters)'}
@@ -41,17 +41,23 @@ class Search extends React.Component {
         </View>
         <MovieList
           State={this.props.State}
-          searchText={this.state.searchText}
+          shortlist={true}
+          addToShortlist={(item)=>{
+            this.props.shortlistAction.addToShortlist(item);
+          }}
         />
       </SafeAreaView>
     );
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   State: state.searchReducer,
 });
 const mapDispatchToProps = (dispatch) => {
-  return {action: bindActionCreators(action, dispatch)};
+  return {
+    action: bindActionCreators(action, dispatch),
+    shortlistAction:bindActionCreators(shortlistAction,dispatch)
+  };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Search);

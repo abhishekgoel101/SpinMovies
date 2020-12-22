@@ -15,7 +15,7 @@ export const getMovies = (searchText) => {
       },
     })
       .then((response) => {
-        if (response.status !== 200) {
+        if (!response.ok) {
           throw new Error(response.message);
         } else {
           return response.json();
@@ -25,10 +25,11 @@ export const getMovies = (searchText) => {
         if (jsonResponse.Response === 'False') {
           throw new Error(jsonResponse.Error);
         }
-        console.log('jsonResponse', json);
+        console.log('jsonResponse', jsonResponse);
         dispatch(moviesData(jsonResponse.Search));
       })
       .catch((error) => {
+        console.log(error);
         dispatch(fetchDataFailure(error.message));
       });
   };

@@ -1,0 +1,1 @@
+export const DEFAULT_MOVIE_IMAGE="https://pbs.twimg.com/profile_images/836629578554748928/DHbaSYYv_400x400.jpg";

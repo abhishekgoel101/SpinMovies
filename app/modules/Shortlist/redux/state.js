@@ -1,7 +1,7 @@
 let initialState = {
-  data: undefined,
+  data: {},
   loading: false,
-  success: false,
+  success: true,
   error:undefined
 };
 
